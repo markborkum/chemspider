@@ -34,6 +34,16 @@ or
 inchi_key = ChemSpider::InChI::InChIToInChIKey.get!(:inchi => inchi)
 #=> 'HLVCOUOCNKNUFB-UHFFFAOYSA-N'
 ```
+
+### Converting an InChI into an InChIKey (via a proxy server)
+
+```ruby
+# accepts the same options as the constructor for the URI class...
+uri_options = { :scheme => :https, :host => 'www.mychemspiderproxy.com', :port => 443 }
+
+inchi_key = ChemSpider::InChI::InChIToInChIKey.get!({ :inchi => inchi }, uri_options)
+#=> 'HLVCOUOCNKNUFB-UHFFFAOYSA-N' (presumably...)
+```
     
 ### Get extended compound info
 
