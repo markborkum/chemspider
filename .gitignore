@@ -1,4 +1,6 @@
-*.gem
+*.DS_Store
+
+# *.gem
 *.rbc
 .bundle
 .config
