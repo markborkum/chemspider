@@ -210,7 +210,7 @@ module ChemSpider
               params[param_name] = args[idx]
             end
           else
-            # treat `args' as an associative array (or "HashWithIndifferentAccess" in Ruby on Rails parlence)...
+            # treat `args' as a "HashWithIndifferentAccess" (in Ruby on Rails parlance)...
             params = param_names.inject({}) { |acc, param_name|
               if args_as_hash.key?(param_name)
                 acc[param_name] = args_as_hash[param_name]
@@ -417,6 +417,8 @@ module ChemSpider
     end
   end
 end
+
+require 'chem_spider/version'
 
 require 'chem_spider/in_ch_i'
 require 'chem_spider/mass_spec_a_p_i'
