@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = 'The ChemSpider API (REST interface) wrapped up with a Ruby bow'
   s.authors     = ['Mark Borkum']
   s.email       = 'm.i.borkum@soton.ac.uk'
-  s.files       = ['lib/chemspider.rb', 'lib/chem_spider.rb'] + %w{version in_ch_i mass_spec_a_p_i open_babel search spectra}.map { |f| 'lib/chem_spider/%s.rb' % f }
+  s.files       = ['lib/chemspider.rb', 'lib/chem_spider.rb', 'lib/chem_spider/version.rb'] + %w{in_ch_i mass_spec_a_p_i open_babel search spectra}.map { |f| 'lib/chem_spider/services/%s.rb' % f }
   s.homepage    = 'https://github.com/markborkum/chemspider'
   s.requirements = 'nokogiri'
 end

@@ -420,8 +420,8 @@ end
 
 require 'chem_spider/version'
 
-require 'chem_spider/in_ch_i'
-require 'chem_spider/mass_spec_a_p_i'
-require 'chem_spider/open_babel'
-require 'chem_spider/search'
-require 'chem_spider/spectra'
+require 'chem_spider/services/in_ch_i'
+require 'chem_spider/services/mass_spec_a_p_i'
+require 'chem_spider/services/open_babel'
+require 'chem_spider/services/search'
+require 'chem_spider/services/spectra'
