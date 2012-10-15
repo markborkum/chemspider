@@ -81,38 +81,53 @@ ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_param_names
 query = 'Aspirin'
 token = 'YOUR_SECURITY_TOKEN'
 
+# the maximum number of attempts...
+ASYNC_SEARCH_STATUS_REQUEST_COUNT = 10
+
+# the amount of time to "sleep" between requests...
+COOLING_OFF_DURATION_SECONDS = 1.0
+
+# $stderr.puts('[Search] "%s"' % [query])
+
 # send the request, and receive the transaction ID...
 rid = ChemSpider::Search::AsyncSimpleSearch.get!(:query => query, :token => token)
 
-# create a flag...
 result_ready = false
 
-(0..10).each do |idx|
+(0..ASYNC_SEARCH_STATUS_REQUEST_COUNT).each do |idx|
   # request the current status for the transaction ID...
   status = ChemSpider::Search::GetAsyncSearchStatus.get!(:rid => rid, :token => token)
-
+  
+  # $stderr.puts('[Status %d of %d] %s => %s' % [idx.to_i + 1, ASYNC_SEARCH_STATUS_REQUEST_COUNT, rid, status])
+  
   case status
   when 'ResultReady'
     # toggle the flag...
     result_ready = true
-
+    
     # we're ready to go...  
     break
-  when 'Failed', 'TooManyRecords'
+  when 'Failed', 'Suspended', 'TooManyRecords'
     # the search has failed (for some reason)...
     break
   else
     # wait...
-    Kernel.sleep(1.0)
+    Kernel.sleep(COOLING_OFF_DURATION_SECONDS)
   end
 end
 
 if result_ready
   # request the results...
   csids = ChemSpider::Search::GetAsyncSearchResult.get!(:rid => rid, :token => token)
-
+  
+  # $stderr.puts('[Results (%d)] %s' % [csids.length, csids.join(', ')])
+  
   # do something with the results...
-  $stdout.puts(csids.inspect)
+  csids.each do |csid|
+    extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(csid, token)
+
+    $stdout.puts(extended_compound_info.inspect)
+  end
 end
 ```
 
