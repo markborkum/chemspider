@@ -143,7 +143,7 @@ Installation
 The recommended installation method is via [RubyGems](http://rubygems.org/).
 To install the latest official release of ChemSpider.rb, do:
 
-    % [sudo] gem install chemspider-0.0.1.gem
+    % [sudo] gem install chemspider
 
 Download
 --------
@@ -156,6 +156,12 @@ Alternatively, download the latest development version as a tarball as
 follows:
 
     % wget http://github.com/markborkum/chemspider/tarball/master
+    
+Resources
+---------
+
+* https://github.com/markborkum/chemspider
+* https://rubygems.org/gems/chemspider
 
 Authors
 -------
