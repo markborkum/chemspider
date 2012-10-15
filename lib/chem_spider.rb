@@ -181,6 +181,9 @@ module ChemSpider
       
       # [re]define the methods...
       %w{get! post!}.each do |method_name|
+        ##
+        # @see ChemSpider#get!
+        # @see ChemSpider#post!
         mod.send(:define_method, method_name.to_sym) do |*args|
           # the default `uri_options` argument is an empty Hash
           uri_options = {}
@@ -230,6 +233,32 @@ module ChemSpider
         # make the method a "module function"...
         mod.send(:module_function, method_name.to_sym)
       end
+      
+      ##
+      # @return [String]
+      mod.send(:define_method, :chem_spider_service_name) do ||
+        service_name.to_s
+      end
+      
+      ##
+      # @return [String]
+      mod.send(:define_method, :chem_spider_operation_name) do ||
+        operation_name.to_s
+      end
+      
+      ##
+      # @return [Array<String>]
+      mod.send(:define_method, :chem_spider_param_names) do ||
+        param_names.collect(&:to_s)
+      end
+      
+      ##
+      # @return [Hash]
+      mod.send(:define_method, :chem_spider_options) do ||
+        options.dup
+      end
+      
+      mod.send(:module_function, :chem_spider_service_name, :chem_spider_operation_name, :chem_spider_param_names, :chem_spider_options)
       
       # done!
       return mod

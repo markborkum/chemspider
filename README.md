@@ -1,7 +1,7 @@
 ChemSpider.rb: ChemSpider wrapped up with a Ruby bow
 ====================================================
 
-This is a pure-Ruby library for working with the [ChemSpider API](http://www.chemspider.com/AboutServices.aspx).
+This is a Ruby library for working with the [ChemSpider API](http://www.chemspider.com/AboutServices.aspx).
 
 Features
 --------
@@ -9,7 +9,7 @@ Features
 * 100% coverage of REST operations (support for SOAP is coming soon).
 * REST operations support both "GET" and "POST" verbs of the HTTP protocol.
 * Provides a clean, object-oriented representation of Web services, operations and their results. 
-* Results are automatically converted into instances of pure Ruby classes. 
+* Results are automatically translated into Ruby objects. 
 * Plays nicely with proxy servers: request URIs can be modified at runtime. 
 
 Examples
@@ -19,7 +19,7 @@ Examples
 require 'chemspider'
 ```
     
-### Converting an InChI into an InChIKey
+### Convert an InChI into an InChIKey
 
 ```ruby
 inchi = 'InChI=1S/C25H44N4O8/c1-14(2)25(12,37-15(3)30)19(34)29-23(8,9)17(32)27-21(4,5)16(31)26-22(6,7)18(33)28-24(10,11)20(35)36-13/h14H,1-13H3,(H,26,31)(H,27,32)(H,28,33)(H,29,34)'
@@ -35,7 +35,7 @@ inchi_key = ChemSpider::InChI::InChIToInChIKey.get!(:inchi => inchi)
 #=> 'HLVCOUOCNKNUFB-UHFFFAOYSA-N'
 ```
 
-### Converting an InChI into an InChIKey (via a proxy server)
+### Convert an InChI into an InChIKey (via a proxy server)
 
 ```ruby
 # accepts the same options as the constructor for the URI class...
@@ -60,6 +60,19 @@ or
 ```ruby
 extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(:CSID => csid, :token => token)
 #=> ChemSpider::ExtendedCompoundInfo
+```
+
+### Get metadata for an operation
+
+```ruby
+ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_service_name
+#=> 'MassSpecAPI'
+
+ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_operation_name
+#=> 'GetExtendedCompoundInfo'
+
+ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_param_names
+#=> ['CSID', 'token']
 ```
     
 ### Perform a "Simple" Search

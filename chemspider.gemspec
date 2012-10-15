@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'chemspider'
   s.version     = '0.0.1'
-  s.date        = '2012-10-14'
+  s.date        = '2012-10-15'
   s.summary     = 'ChemSpider API'
   s.description = 'The ChemSpider API (REST interface) wrapped up with a Ruby bow'
   s.authors     = ['Mark Borkum']
