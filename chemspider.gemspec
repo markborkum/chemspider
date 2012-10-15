@@ -1,12 +1,25 @@
 Gem::Specification.new do |s|
-  s.name        = 'chemspider'
-  s.version     = '0.0.1'
-  s.date        = '2012-10-15'
-  s.summary     = 'ChemSpider API'
-  s.description = 'The ChemSpider API (REST interface) wrapped up with a Ruby bow'
-  s.authors     = ['Mark Borkum']
-  s.email       = 'm.i.borkum@soton.ac.uk'
-  s.files       = ['lib/chemspider.rb', 'lib/chem_spider.rb', 'lib/chem_spider/version.rb'] + %w{in_ch_i mass_spec_a_p_i open_babel search spectra}.map { |f| 'lib/chem_spider/services/%s.rb' % f }
-  s.homepage    = 'https://github.com/markborkum/chemspider'
-  s.requirements = 'nokogiri'
+  s.version            = File.read('VERSION').chomp
+  s.date               = File.mtime('VERSION').strftime('%Y-%m-%d')
+  
+  s.name               = 'chemspider'
+  s.homepage           = 'https://github.com/markborkum/chemspider'
+  s.license            = 'Public Domain' if s.respond_to?(:license=)
+  s.summary            = 'A Ruby library for working with the ChemSpider API.'
+  s.description        = 'The ChemSpider API wrapped up with a Ruby bow.'
+# s.rubyforge_project  = nil
+  
+  s.authors            = ['Mark Borkum']
+  s.email              = 'm.i.borkum@soton.ac.uk'
+  
+  s.platform           = Gem::Platform::RUBY
+  s.files              = %w{README UNLICENSE VERSION} + Dir.glob('lib/**/*.rb')
+  s.require_paths      = %w{lib}
+  s.has_rdoc           = false
+  
+  s.requirements       = []
+  
+  s.add_runtime_dependency 'nokogiri', '>= 1.5.0'
+  
+  s.post_install_message = nil
 end

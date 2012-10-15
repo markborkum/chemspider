@@ -167,3 +167,9 @@ Authors
 -------
 
 * [Mark Borkum](http://github.com/markborkum) - <http://twitter.com/markborkum>
+
+License
+-------
+
+This is free and unencumbered public domain software. For more information,
+see <http://unlicense.org/> or the accompanying {file:UNLICENSE} file.
