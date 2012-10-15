@@ -52,14 +52,14 @@ csid = 4401975
 token = 'YOUR_SECURITY_TOKEN'
 
 extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(csid, token)
-#=> ChemSpider::ExtendedCompoundInfo
+#=> #<ChemSpider::ExtendedCompoundInfo:0x1019d2338 @nominal_mass=528.0, @molecular_weight=528.6389, @molecular_formula="C_{25}H_{44}N_{4}O_{8}", @inchi_key="HLVCOUOCNKNUFB-UHFFFAOYAA", @smiles="O=C(OC)C(NC(=O)C(NC(=O)C(NC(=O)C(NC(=O)C(OC(=O)C)(C)C(C)C)(C)C)(C)C)(C)C)(C)C", @common_name="Methyl N-(2-acetoxy-2,3-dimethylbutanoyl)-2-methylalanyl-2-methylalanyl-2-methylalanyl-2-methylalaninate", @a_log_p=2.18, @monoisotopic_mass=528.315979003906, @average_mass=528.639, @inchi="InChI=1/C25H44N4O8/c1-14(2)25(12,37-15(3)30)19(34)29-23(8,9)17(32)27-21(4,5)16(31)26-22(6,7)18(33)28-24(10,11)20(35)36-13/h14H,1-13H3,(H,26,31)(H,27,32)(H,28,33)(H,29,34)", @csid=4401975, @x_log_p=0.5>
 ```
 
 or
 
 ```ruby
 extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(:CSID => csid, :token => token)
-#=> ChemSpider::ExtendedCompoundInfo
+#=> #<ChemSpider::ExtendedCompoundInfo:0x1019d2338 @nominal_mass=528.0, @molecular_weight=528.6389, @molecular_formula="C_{25}H_{44}N_{4}O_{8}", @inchi_key="HLVCOUOCNKNUFB-UHFFFAOYAA", @smiles="O=C(OC)C(NC(=O)C(NC(=O)C(NC(=O)C(NC(=O)C(OC(=O)C)(C)C(C)C)(C)C)(C)C)(C)C)(C)C", @common_name="Methyl N-(2-acetoxy-2,3-dimethylbutanoyl)-2-methylalanyl-2-methylalanyl-2-methylalanyl-2-methylalaninate", @a_log_p=2.18, @monoisotopic_mass=528.315979003906, @average_mass=528.639, @inchi="InChI=1/C25H44N4O8/c1-14(2)25(12,37-15(3)30)19(34)29-23(8,9)17(32)27-21(4,5)16(31)26-22(6,7)18(33)28-24(10,11)20(35)36-13/h14H,1-13H3,(H,26,31)(H,27,32)(H,28,33)(H,29,34)", @csid=4401975, @x_log_p=0.5>
 ```
 
 ### Get metadata for an operation
