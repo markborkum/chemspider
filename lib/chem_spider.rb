@@ -38,8 +38,8 @@ module ChemSpider
     #   })
     #   #=> 2157
     #
-    # @param [#to_s] service_name
-    # @param [#to_s] operation_name
+    # @param [#to_sym] service_name
+    # @param [#to_sym] operation_name
     # @param [Hash{Symbol => Object}] params (Hash.new)
     # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option uri_options [#to_s] :scheme ('http')
@@ -100,8 +100,8 @@ module ChemSpider
     #   })
     #   #=> 2157
     #
-    # @param [#to_s] service_name
-    # @param [#to_s] operation_name
+    # @param [#to_sym] service_name
+    # @param [#to_sym] operation_name
     # @param [Hash{Symbol => Object}] params (Hash.new)
     # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option uri_options [#to_s] :scheme ('http')
@@ -150,8 +150,8 @@ module ChemSpider
     #   m.post!(:inchi_key => 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
     #   #=> 2157
     #
-    # @param [#to_s] service_name
-    # @param [#to_s] operation_name
+    # @param [#to_sym] service_name
+    # @param [#to_sym] operation_name
     # @param [Array<String>] param_names (Array.new)
     # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option options [#to_s] :selector (nil)
@@ -387,8 +387,8 @@ module ChemSpider
     #   })
     #   #=> #<URI::HTTP:0x101990e88 URL:http://www.example.com:443/chemspider/InChI/InChIKeyToCSID?inchi_key=BSYNRYMUTXBXSQ-UHFFFAOYSA-N>
     #
-    # @param [#to_s] service_name
-    # @param [#to_s] operation_name
+    # @param [#to_sym] service_name
+    # @param [#to_sym] operation_name
     # @param [Hash{Symbol => Object}] params (Hash.new)
     # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option options [#to_s] :scheme ('http')
