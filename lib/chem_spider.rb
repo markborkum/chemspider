@@ -50,7 +50,7 @@ module ChemSpider
     # @option uri_options [#to_s] :query (nil)
     # @option uri_options [#to_s] :fragment (nil)
     # @option options [#to_s] :selector (nil)
-    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Object}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
     # @return [Object]
     # @since 0.0.1
@@ -112,7 +112,7 @@ module ChemSpider
     # @option uri_options [#to_s] :query (nil)
     # @option uri_options [#to_s] :fragment (nil)
     # @option options [#to_s] :selector (nil)
-    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Object}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
     # @return [Object]
     # @since 0.0.1
@@ -155,7 +155,7 @@ module ChemSpider
     # @param [Array<String>] param_names (Array.new)
     # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option options [#to_s] :selector (nil)
-    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Object}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
     # @return [Module]
     # @since 0.0.1
@@ -173,6 +173,7 @@ module ChemSpider
       # [re]define the methods...
       %w{get! post!}.each do |method_name|
         ##
+        # @return [Object]
         # @see ChemSpider#get!
         # @see ChemSpider#post!
         # @since 0.0.1
@@ -290,7 +291,7 @@ module ChemSpider
     # @param [Nokogiri::XML::Node] doc
     # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option options [#to_s] :selector (nil)
-    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Object}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
     # @return [Object]
     # @since 0.0.1
