@@ -41,6 +41,7 @@ module ChemSpider
     # @param [#to_s] service_name
     # @param [#to_s] operation_name
     # @param [Hash{Symbol => Object}] params (Hash.new)
+    # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option uri_options [#to_s] :scheme ('http')
     # @option uri_options [#to_s] :host ('www.chemspider.com')
     # @option uri_options [#to_s] :port (80)
@@ -102,6 +103,7 @@ module ChemSpider
     # @param [#to_s] service_name
     # @param [#to_s] operation_name
     # @param [Hash{Symbol => Object}] params (Hash.new)
+    # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option uri_options [#to_s] :scheme ('http')
     # @option uri_options [#to_s] :host ('www.chemspider.com')
     # @option uri_options [#to_s] :port (80)
@@ -150,7 +152,8 @@ module ChemSpider
     #
     # @param [#to_s] service_name
     # @param [#to_s] operation_name
-    # @param [Array<String>] param_names
+    # @param [Array<String>] param_names (Array.new)
+    # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option options [#to_s] :selector (nil)
     # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
@@ -172,6 +175,7 @@ module ChemSpider
         ##
         # @see ChemSpider#get!
         # @see ChemSpider#post!
+        # @since 0.0.1
         mod.send(:define_method, method_name.to_sym) do |*args|
           # the default `uri_options` argument is an empty Hash
           uri_options = {}
@@ -244,7 +248,7 @@ module ChemSpider
       end
       
       ##
-      # @return [Hash]
+      # @return [Hash{Symbol => Object}]
       # @since 0.0.2
       mod.send(:define_method, :chem_spider_options) do ||
         options.dup
@@ -284,6 +288,7 @@ module ChemSpider
     # Extracts nodes specified by a CSS selector, and casts the result. 
     # 
     # @param [Nokogiri::XML::Node] doc
+    # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option options [#to_s] :selector (nil)
     # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
@@ -383,7 +388,8 @@ module ChemSpider
     #
     # @param [#to_s] service_name
     # @param [#to_s] operation_name
-    # @param [Hash{Symbol => object}] params (Hash.new)
+    # @param [Hash{Symbol => Object}] params (Hash.new)
+    # @param [Hash{Symbol => Object}] options (Hash.new)
     # @option options [#to_s] :scheme ('http')
     # @option options [#to_s] :host ('www.chemspider.com')
     # @option options [#to_s] :port (80)
