@@ -236,24 +236,28 @@ module ChemSpider
       
       ##
       # @return [String]
+      # @since 0.0.2
       mod.send(:define_method, :chem_spider_service_name) do ||
         service_name.to_s
       end
       
       ##
       # @return [String]
+      # @since 0.0.2
       mod.send(:define_method, :chem_spider_operation_name) do ||
         operation_name.to_s
       end
       
       ##
       # @return [Array<String>]
+      # @since 0.0.2
       mod.send(:define_method, :chem_spider_param_names) do ||
         param_names.collect(&:to_s)
       end
       
       ##
       # @return [Hash]
+      # @since 0.0.2
       mod.send(:define_method, :chem_spider_options) do ||
         options.dup
       end
