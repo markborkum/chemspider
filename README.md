@@ -16,40 +16,44 @@ Examples
 --------
 
 ```ruby
-require 'chemspider'
+require "chemspider"
 ```
     
 ### Convert an InChI into an InChIKey
 
 ```ruby
-inchi = 'InChI=1S/C25H44N4O8/c1-14(2)25(12,37-15(3)30)19(34)29-23(8,9)17(32)27-21(4,5)16(31)26-22(6,7)18(33)28-24(10,11)20(35)36-13/h14H,1-13H3,(H,26,31)(H,27,32)(H,28,33)(H,29,34)'
+inchi = "InChI=1S/C25H44N4O8/c1-14(2)25(12,37-15(3)30)19(34)29-23(8,9)17(32)27-21(4,5)16(31)26-22(6,7)18(33)28-24(10,11)20(35)36-13/h14H,1-13H3,(H,26,31)(H,27,32)(H,28,33)(H,29,34)"
 
 inchi_key = ChemSpider::InChI::InChIToInChIKey.get!(inchi)
-#=> 'HLVCOUOCNKNUFB-UHFFFAOYSA-N'
+#=> "HLVCOUOCNKNUFB-UHFFFAOYSA-N"
 ```
 
 or
 
 ```ruby
 inchi_key = ChemSpider::InChI::InChIToInChIKey.get!(:inchi => inchi)
-#=> 'HLVCOUOCNKNUFB-UHFFFAOYSA-N'
+#=> "HLVCOUOCNKNUFB-UHFFFAOYSA-N"
 ```
 
 ### Convert an InChI into an InChIKey (via a proxy server)
 
 ```ruby
 # accepts the same options as the constructor for the URI class...
-uri_options = { :scheme => :https, :host => 'www.mychemspiderproxy.com', :port => 443 }
+uri_options = { 
+  :scheme => :https, 
+  :host   => "www.mychemspiderproxy.com", 
+  :port   => 443,
+}
 
 inchi_key = ChemSpider::InChI::InChIToInChIKey.get!({ :inchi => inchi }, uri_options)
-#=> 'HLVCOUOCNKNUFB-UHFFFAOYSA-N' (presumably...)
+#=> "HLVCOUOCNKNUFB-UHFFFAOYSA-N"
 ```
     
 ### Get extended compound info
 
 ```ruby
 csid = 4401975
-token = 'YOUR_SECURITY_TOKEN'
+token = "YOUR_SECURITY_TOKEN"
 
 extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(csid, token)
 #=> #<ChemSpider::ExtendedCompoundInfo:0x1019d2338 @nominal_mass=528.0, @molecular_weight=528.6389, @molecular_formula="C_{25}H_{44}N_{4}O_{8}", @inchi_key="HLVCOUOCNKNUFB-UHFFFAOYAA", @smiles="O=C(OC)C(NC(=O)C(NC(=O)C(NC(=O)C(NC(=O)C(OC(=O)C)(C)C(C)C)(C)C)(C)C)(C)C)(C)C", @common_name="Methyl N-(2-acetoxy-2,3-dimethylbutanoyl)-2-methylalanyl-2-methylalanyl-2-methylalanyl-2-methylalaninate", @a_log_p=2.18, @monoisotopic_mass=528.315979003906, @average_mass=528.639, @inchi="InChI=1/C25H44N4O8/c1-14(2)25(12,37-15(3)30)19(34)29-23(8,9)17(32)27-21(4,5)16(31)26-22(6,7)18(33)28-24(10,11)20(35)36-13/h14H,1-13H3,(H,26,31)(H,27,32)(H,28,33)(H,29,34)", @csid=4401975, @x_log_p=0.5>
@@ -66,13 +70,13 @@ extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(:
 
 ```ruby
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_service_name
-#=> 'MassSpecAPI'
+#=> "MassSpecAPI"
 
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_operation_name
-#=> 'GetExtendedCompoundInfo'
+#=> "GetExtendedCompoundInfo"
 
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_param_names
-#=> ['CSID', 'token']
+#=> ["CSID", "token"]
 
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_options
 #=> { :selector => "ExtendedCompoundInfo", :datatype => ChemSpider::ExtendedCompoundInfo, :first_child => true }
@@ -81,8 +85,8 @@ ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_options
 ### Perform a "Simple" Search
 
 ```ruby
-query = 'Aspirin'
-token = 'YOUR_SECURITY_TOKEN'
+query = "Aspirin"
+token = "YOUR_SECURITY_TOKEN"
 
 # the maximum number of attempts...
 ASYNC_SEARCH_STATUS_REQUEST_COUNT = 10
@@ -90,7 +94,7 @@ ASYNC_SEARCH_STATUS_REQUEST_COUNT = 10
 # the amount of time to "sleep" between requests...
 COOLING_OFF_DURATION_SECONDS = 1.0
 
-# $stderr.puts('[Search] "%s"' % [query])
+# $stderr.puts("[Search] #{query.inspect}")
 
 # send the request, and receive the transaction ID...
 rid = ChemSpider::Search::AsyncSimpleSearch.get!(:query => query, :token => token)
@@ -101,16 +105,16 @@ result_ready = false
   # request the current status for the transaction ID...
   status = ChemSpider::Search::GetAsyncSearchStatus.get!(:rid => rid, :token => token)
   
-  # $stderr.puts('[Status %d of %d] %s => %s' % [idx.to_i + 1, ASYNC_SEARCH_STATUS_REQUEST_COUNT, rid, status])
+  # $stderr.puts("[Status #{idx.to_i + 1} of #{ASYNC_SEARCH_STATUS_REQUEST_COUNT}] #{rid} => #{status}")
   
   case status
-  when 'ResultReady'
+  when "ResultReady"
     # toggle the flag...
     result_ready = true
     
     # we're ready to go...  
     break
-  when 'Failed', 'Suspended', 'TooManyRecords'
+  when "Failed", "Suspended", "TooManyRecords"
     # the search has failed (for some reason)...
     break
   else
@@ -123,7 +127,7 @@ if result_ready
   # request the results...
   csids = ChemSpider::Search::GetAsyncSearchResult.get!(:rid => rid, :token => token)
   
-  # $stderr.puts('[Results (%d)] %s' % [csids.length, csids.join(', ')])
+  # $stderr.puts("[Results (#{csids.length})] #{csids.join(", ")}")
   
   # do something with the results...
   csids.each do |csid|
