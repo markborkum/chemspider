@@ -131,7 +131,7 @@ if result_ready
   
   # do something with the results...
   csids.each do |csid|
-    extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(csid, token)
+    extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(:CSID => csid, :token => token)
 
     $stdout.puts(extended_compound_info.inspect)
   end
