@@ -73,8 +73,11 @@ ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_operation_name
 
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_param_names
 #=> ['CSID', 'token']
+
+ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_options
+#=> { :selector => "ExtendedCompoundInfo", :datatype => ChemSpider::ExtendedCompoundInfo, :first_child => true }
 ```
-    
+   
 ### Perform a "Simple" Search
 
 ```ruby
