@@ -40,7 +40,7 @@ module ChemSpider
     #
     # @param [#to_s] service_name
     # @param [#to_s] operation_name
-    # @param [Hash] params (Hash.new)
+    # @param [Hash{Symbol => Object}] params (Hash.new)
     # @option uri_options [#to_s] :scheme ('http')
     # @option uri_options [#to_s] :host ('www.chemspider.com')
     # @option uri_options [#to_s] :port (80)
@@ -49,14 +49,10 @@ module ChemSpider
     # @option uri_options [#to_s] :query (nil)
     # @option uri_options [#to_s] :fragment (nil)
     # @option options [#to_s] :selector (nil)
-    # @option options [Hash, Class, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
-    #
     # @return [Object]
-    #
-    # @see ChemSpider#css
-    # @see ChemSpider#uri_for
-    #
+    # @since 0.0.1
     def get!(service_name, operation_name, params = {}, uri_options = {}, options = {})
       # construct the URI...
       uri = uri_for(service_name, operation_name, params, uri_options)
@@ -105,7 +101,7 @@ module ChemSpider
     #
     # @param [#to_s] service_name
     # @param [#to_s] operation_name
-    # @param [Hash] params (Hash.new)
+    # @param [Hash{Symbol => Object}] params (Hash.new)
     # @option uri_options [#to_s] :scheme ('http')
     # @option uri_options [#to_s] :host ('www.chemspider.com')
     # @option uri_options [#to_s] :port (80)
@@ -114,14 +110,10 @@ module ChemSpider
     # @option uri_options [#to_s] :query (nil)
     # @option uri_options [#to_s] :fragment (nil)
     # @option options [#to_s] :selector (nil)
-    # @option options [Hash, Class, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
-    #
     # @return [Object]
-    #
-    # @see ChemSpider#css
-    # @see ChemSpider#uri_for
-    #
+    # @since 0.0.1
     def post!(service_name, operation_name, params = {}, uri_options = {}, options = {})
       # construct the URI...
       uri = uri_for(service_name, operation_name, nil, uri_options)
@@ -160,14 +152,10 @@ module ChemSpider
     # @param [#to_s] operation_name
     # @param [Array<String>] param_names
     # @option options [#to_s] :selector (nil)
-    # @option options [Hash, Class, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
-    #
     # @return [Module]
-    #
-    # @see ChemSpider#get!
-    # @see ChemSpider#post!
-    #
+    # @since 0.0.1
     def REST(service_name, operation_name, param_names = [], options = {})
       # find/create the specified module...
       # #=> "ChemSpider::#{service_name}::#{operation_name}"
@@ -272,9 +260,8 @@ module ChemSpider
     # Returns a unary callable that casts the argument to the specified `Class`. 
     #
     # @param [Class] klass
-    #
     # @return [#call]
-    #
+    # @since 0.0.1
     def cast_for(klass)
       # lazily construct the set of callables...
       @casts ||= {
@@ -298,13 +285,10 @@ module ChemSpider
     # 
     # @param [Nokogiri::XML::Node] doc
     # @option options [#to_s] :selector (nil)
-    # @option options [Class, Hash, #__attributes__, #new] :datatype (Hash.new)
+    # @option options [Hash{Symbol => Hash{Symbol => Object}}, Class, #__attributes__, #new] :datatype (Hash.new)
     # @option options [Boolean] :first_child (false)
-    #
     # @return [Object]
-    # 
-    # @see ChemSpider#cast_for
-    #
+    # @since 0.0.1
     def css(doc, options = {})
       # evaluate the CSS selector...
       nodes = doc.css(options[:selector].to_s)
@@ -363,10 +347,9 @@ module ChemSpider
     # @example Construct a query string with multivalued parameters.
     #   ChemSpider.query_for(:letters => %w{a b c}) #=> 'letters=a&letters=b&letters=c'
     #
-    # @param [Array, Hash] pairs
-    #
+    # @param [Array<#to_s>, Hash{Symbol => Object}] pairs
     # @return [#to_s]
-    #
+    # @since 0.0.1
     def query_for(pairs)
       return nil if pairs.nil? || pairs.empty?
       
@@ -400,7 +383,7 @@ module ChemSpider
     #
     # @param [#to_s] service_name
     # @param [#to_s] operation_name
-    # @param [Hash] params (Hash.new)
+    # @param [Hash{Symbol => object}] params (Hash.new)
     # @option options [#to_s] :scheme ('http')
     # @option options [#to_s] :host ('www.chemspider.com')
     # @option options [#to_s] :port (80)
@@ -408,11 +391,9 @@ module ChemSpider
     # @option options [#to_s] :path_format ('/%s.asmx/%s')
     # @option options [#to_s] :query (nil)
     # @option options [#to_s] :fragment (nil)
-    #
     # @return [URI]
-    #
     # @see ChemSpider#query_for
-    #
+    # @since 0.0.1
     def uri_for(service_name, operation_name, params = {}, options = {})
       # initialize the format string for the base URI "scheme://host:port"...
       format = '%s://%s:%s'
