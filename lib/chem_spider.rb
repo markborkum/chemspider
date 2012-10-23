@@ -385,7 +385,7 @@ module ChemSpider
     #     :port => 443,
     #     :path_format => '/chemspider/%s/%s',
     #   })
-    #   #=> #<URI::HTTP:0x101990e88 URL:http://www.example.com:443/chemspider/InChI/InChIKeyToCSID?inchi_key=BSYNRYMUTXBXSQ-UHFFFAOYSA-N>
+    #   #=> #<URI::HTTPS:0x101990e88 URL:https://www.example.com:443/chemspider/InChI/InChIKeyToCSID?inchi_key=BSYNRYMUTXBXSQ-UHFFFAOYSA-N>
     #
     # @param [#to_sym] service_name
     # @param [#to_sym] operation_name
