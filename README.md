@@ -70,10 +70,10 @@ extended_compound_info = ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.get!(:
 
 ```ruby
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_service_name
-#=> "MassSpecAPI"
+#=> :MassSpecAPI
 
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_operation_name
-#=> "GetExtendedCompoundInfo"
+#=> :GetExtendedCompoundInfo
 
 ChemSpider::MassSpecAPI::GetExtendedCompoundInfo.chem_spider_param_names
 #=> ["CSID", "token"]

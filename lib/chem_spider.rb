@@ -228,17 +228,17 @@ module ChemSpider
       end
       
       ##
-      # @return [String]
+      # @return [Symbol]
       # @since 0.0.2
       mod.send(:define_method, :chem_spider_service_name) do ||
-        service_name.to_s
+        service_name.to_sym
       end
       
       ##
-      # @return [String]
+      # @return [Symbol]
       # @since 0.0.2
       mod.send(:define_method, :chem_spider_operation_name) do ||
-        operation_name.to_s
+        operation_name.to_sym
       end
       
       ##
