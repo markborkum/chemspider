@@ -300,34 +300,26 @@ module ChemSpider
     # @return [Object]
     # @since 0.0.1
     def css(doc, options = {})
-      # evaluate the CSS selector...
+      # evaluate the specified CSS selector...
       nodes = doc.css(options[:selector].to_s)
       
-      # lazily initialize the datatype to `Hash.new`...
-      if !(datatype = (options[:datatype] || {})).nil?
-        # the set of attributes...
-        attributes = nil
-        
-        # specifies whether or not we should reify the result (by passing it to a constructor)...
-        responds_to_new = nil
-        
-        # test if the datatype responds to the duck typing method...
-        if datatype.respond_to?(:__attributes__)
-          # extract the set of attributes from the datatype...
-          attributes = datatype.send(:__attributes__)
-          
-          # test if we should reify the result, i.e., does the datatype have a constructor?
-          responds_to_new = datatype.respond_to?(:new)
+      # cast the results to the specified datatype...
+      if !(datatype = options[:datatype]).nil?
+        attributes = if datatype.respond_to?(:__attributes__)
+          # the specified datatype responds to the duck typing method...
+          datatype.send(:__attributes__)
         elsif datatype.is_a?(Hash)
-          # the datatype "is" the set of attributes...
-          attributes = datatype
-          
-          # do not reify the result...
-          responds_to_new = false
+          # the specified datatype is the description of the attributes...
+          datatype
+        else
+          # no attributes...
+          nil
         end
         
-        # test if the set of attributes is valid...
-        if attributes.is_a?(Hash)
+        if attributes.nil?
+          # extract the content of each node, and cast the result...
+          nodes = nodes.map { |node| node.content.to_s }.map(&cast_for(datatype))
+        else
           # recursively extract each node...
           nodes = nodes.map { |node|
             attributes.inject({}) { |acc, pair|
@@ -335,12 +327,9 @@ module ChemSpider
               acc
             }
           }
-          
-          # reify the extracted results (if needed)...
-          nodes = nodes.map { |*args| datatype.send(:new, *args) } if responds_to_new
-        else
-          # extract the content of each node, and cast the result...
-          nodes = nodes.map { |node| node.content.to_s }.map(&cast_for(datatype))
+
+          # reify the extracted results...
+          nodes = nodes.map { |*args| datatype.send(:new, *args) } if datatype.respond_to?(:new)
         end
       end
       
