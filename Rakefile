@@ -10,5 +10,5 @@ require 'chemspider'
 
 desc "Build the chemspider-#{File.read('VERSION').chomp}.gem file"
 task :build do
-  sh "gem build .gemspec"
+  sh "gem build chemspider.gemspec"
 end
